@@ -1,0 +1,62 @@
+<% include _header %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href="/stylesheets/boostrap.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><%=__('Available products')  %></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#"> <%= __('Menu')  %>
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><%= __('Features')  %></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><%= __('Price')  %></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><%= __('Contact')  %></a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-sm-2" type="text" placeholder="Buscar">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit"><%= __('Search')  %></button>
+          </form>
+        </div>
+      </div>
+    </nav>
+<br>
+      <% anuncios.forEach( anuncio => { %>
+      <div class="card mb-3">
+      <h3 class="card-header"><%= anuncio.nombre %></h3>
+      <img src="../images/<%=anuncio.foto %>" style= "max-width: 300px; max-height: 300px;">
+      </img>
+      <ul class="list-group list-group-flush">
+        <% if (anuncio.venta) {%> 
+        <li class="list-group-item"><%= __('For sale')  %></li>
+        <% }else{ %> 
+        <li class="list-group-item"><%= __('Purchase')  %></li>
+        <% } %> 
+        <li class="list-group-item"><%= __('Price:')  %><span><%= anuncio.precio %></span> €</li>
+        <% anuncio.tags.forEach( tag => { %>
+          <li class="list-group-item"><%= tag %></li>
+          <% }); %>
+      </ul>
+    </div>
+    <% }); %>
+  </body>
+</html>
+<% include _footer %>
+    
